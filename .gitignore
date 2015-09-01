@@ -1,0 +1,5 @@
+*.apk
+*.class
+*/*/gen
+*/*/bin
+

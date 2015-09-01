@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">dp-state</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="user_name">用户名</string>
+    <string name="pwd">密码</string>
+    <string name="login">登录</string>
+    <string name="logout">注销</string>
+    <string name="forward">转发</string>
+
+</resources>
