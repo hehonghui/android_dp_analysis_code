@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">android_dp_note</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="note_tips">写点嘛~</string>
+    <string name="save">保存</string>
+
+</resources>
