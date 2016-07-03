@@ -10,5 +10,5 @@
 * `android_dp_plugin、android_dp_plugin_host、android_dp_plugin_plugin`为第23章的动态加载框架（参考DL）的demo ;
 * appcompat_v7 : android demo需要依赖的库;
 
-* 书中的ImageLoader在chapter01中，更详细的ImageLoader 示例 在[这里](https://github.com/hehonghui/simple_imageloader) 。
+* 书中的ImageLoader只是一个最简单的demo，更详细的ImageLoader 示例 在[这里](https://github.com/hehonghui/simple_imageloader) 。
 * 最后一章的例子在[这里](https://github.com/bboyfeiyu/the-tech-frontier-app) 。
