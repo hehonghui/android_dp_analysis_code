@@ -3,6 +3,8 @@
 */*/gen
 */*/bin
 
+*/**/.DS_Store
+
 # Built application files
 *.apk
 *.ap_
@@ -30,4 +32,3 @@ proguard/
 
 # Log Files
 *.log
->>>>>>> 0f174482a62d8051f58e2e7cac5a3de08c5ddaa9
