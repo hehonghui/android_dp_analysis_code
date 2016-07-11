@@ -33,6 +33,9 @@ import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import com.android.dp.book.chapter02.refactor.cache.ImageCache;
+import com.android.dp.book.chapter02.refactor.cache.MemoryCache;
+
 /**
  * 图片加载类
  */

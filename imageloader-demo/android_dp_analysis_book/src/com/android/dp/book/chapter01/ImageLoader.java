@@ -26,6 +26,7 @@ package com.android.dp.book.chapter01;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
 import android.support.v4.util.LruCache;
 import android.widget.ImageView;
 
@@ -43,6 +44,7 @@ public class ImageLoader {
     // 线程池,线程数量为CPU的数量
     ExecutorService mExecutorService = Executors.newFixedThreadPool(Runtime.getRuntime()
             .availableProcessors());
+    private Handler mUiHandler = new Handler() ;
 
     public ImageLoader() {
         initImageCache();
@@ -61,6 +63,16 @@ public class ImageLoader {
             }
         };
     }
+    
+    private void updateImageView(final ImageView imageView, final Bitmap bitmap) {
+		mUiHandler.post(new Runnable() {
+			
+			@Override
+			public void run() {
+				 imageView.setImageBitmap(bitmap); ;				
+			}
+		});
+	}
 
     public void displayImage(final String url, final ImageView imageView) {
         imageView.setTag(url);
@@ -73,7 +85,7 @@ public class ImageLoader {
                     return;
                 }
                 if (imageView.getTag().equals(url)) {
-                    imageView.setImageBitmap(bitmap);
+                	updateImageView(imageView, bitmap) ;
                 }
                 mImageCache.put(url, bitmap);
             }

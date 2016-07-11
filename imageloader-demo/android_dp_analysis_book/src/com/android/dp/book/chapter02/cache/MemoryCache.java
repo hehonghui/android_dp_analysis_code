@@ -22,50 +22,41 @@
  * THE SOFTWARE.
  */
 
-package com.android.dp.book.chapter02.refactor;
+package com.android.dp.book.chapter02.cache;
 
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.CompressFormat;
-
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import android.support.v4.util.LruCache;
 
 /**
- * 本地(sd卡)图片缓存
+ * 图片缓存,使用内存空间存储图片 (LRU算法).
+ * 
  */
-public class DiskCache implements ImageCache {
+public class MemoryCache {
+    // LRU缓存
+    private LruCache<String, Bitmap> mMemeryCache;
 
-    @Override
-    public Bitmap get(String url) {
-        return null/* 从本地文件中获取该图片 */;
-    }
+    public MemoryCache() {
+        // 计算可使用的最大内存
+        final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
+        // 取4分之一的可用内存作为缓存
+        final int cacheSize = maxMemory / 4;
+        mMemeryCache = new LruCache<String, Bitmap>(cacheSize) {
 
-    private String imageUrl2MD5(String imageUrl) {
-        // 对imgeUrl进行md5运算, 省略
-        String md5 = imageUrl;
-        return md5;
-    }
-
-    @Override
-    public void put(String url, Bitmap bmp) {
-        // 将Bitmap写入文件中
-        FileOutputStream fos = null;
-        try {
-            // 构建图片的存储路径 ( 省略了对url取md5)
-            fos = new FileOutputStream("sdcard/cache/" + imageUrl2MD5(url));
-            bmp.compress(CompressFormat.JPEG, 100, fos);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } finally {
-            if ( fos != null ) {
-                try {
-                    fos.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            @Override
+            protected int sizeOf(String key, Bitmap bitmap) {
+                return bitmap.getRowBytes() * bitmap.getHeight() / 1024;
             }
-        }
+        };
+
     }
 
+    // 从缓存中获取图片
+    public Bitmap get(String url) {
+        return mMemeryCache.get(url);
+    }
+
+    // 将图片缓存到内存中
+    public void put(String url, Bitmap bmp) {
+        mMemeryCache.put(url, bmp);
+    }
 }

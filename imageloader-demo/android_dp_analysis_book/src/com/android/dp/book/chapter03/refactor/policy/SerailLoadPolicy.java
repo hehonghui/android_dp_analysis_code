@@ -22,39 +22,24 @@
  * THE SOFTWARE.
  */
 
-package com.android.dp.book.chapter02.refactor;
+package com.android.dp.book.chapter03.refactor.policy;
 
-import android.graphics.Bitmap;
-import android.support.v4.util.LruCache;
+import java.util.List;
 
 /**
- * 内存缓存
+ * 顺序加载,先请求的就会先被加载
  */
-public class MemoryCache implements ImageCache {
-    private LruCache<String, Bitmap> mMemeryCache;
+public class SerailLoadPolicy implements LoaderPolicy {
 
-    public MemoryCache() {
-        // 计算可使用的最大内存
-        final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
-        // 取4分之一的可用内存作为缓存
-        final int cacheSize = maxMemory / 4;
-        mMemeryCache = new LruCache<String, Bitmap>(cacheSize) {
+    List<String> mWattingList;
 
-            @Override
-            protected int sizeOf(String key, Bitmap bitmap) {
-                return bitmap.getRowBytes() * bitmap.getHeight() / 1024;
-            }
-        };
-
+    public SerailLoadPolicy(List<String> list) {
+        mWattingList = list;
     }
 
-    @Override
-    public Bitmap get(String url) {
-        return mMemeryCache.get(url);
+    public String getUrl() {
+        int size = mWattingList.size();
+        return size > 0 ? mWattingList.get(0) : "";
     }
 
-    @Override
-    public void put(String url, Bitmap bmp) {
-        mMemeryCache.put(url, bmp);
-    }
 }

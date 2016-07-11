@@ -22,11 +22,36 @@
  * THE SOFTWARE.
  */
 
-package com.android.dp.book.chapter03.refactor;
+package com.android.dp.book.chapter02.cache;
 
-/**
- * 加载策略,抽象化
- */
-public interface LoaderPolicy {
-    public String getUrl();
+import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
+import android.graphics.BitmapFactory;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+import com.android.dp.book.chapter02.CloseUtils;
+
+public class DiskCache {
+    static String cacheDir = "sdcard/cache/";
+
+    // 从缓存中获取图片
+    public Bitmap get(String url) {
+        return BitmapFactory.decodeFile(cacheDir + url);
+    }
+
+    // 将图片缓存到内存中
+    public void put(String url, Bitmap bmp) {
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileOutputStream = new FileOutputStream(cacheDir + url);
+            bmp.compress(CompressFormat.PNG, 100, fileOutputStream);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            CloseUtils.closeQuietly(fileOutputStream);
+        }
+    }
 }

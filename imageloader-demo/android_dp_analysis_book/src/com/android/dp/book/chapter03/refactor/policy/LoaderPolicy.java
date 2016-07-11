@@ -22,24 +22,11 @@
  * THE SOFTWARE.
  */
 
-package com.android.dp.book.chapter03.refactor;
-
-import java.util.List;
+package com.android.dp.book.chapter03.refactor.policy;
 
 /**
- * 从队尾开始加载,即逆序加载
+ * 加载策略,抽象化
  */
-public class ReverseLoadPolicy implements LoaderPolicy {
-
-    List<String> mWattingList;
-
-    public ReverseLoadPolicy(List<String> list) {
-        mWattingList = list;
-    }
-
-    public String getUrl() {
-        int size = mWattingList.size();
-        return size > 0 ? mWattingList.get(size) : "";
-    }
-
+public interface LoaderPolicy {
+    public String getUrl();
 }

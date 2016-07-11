@@ -22,7 +22,9 @@
  * THE SOFTWARE.
  */
 
-package com.android.dp.book.chapter02.refactor;
+package com.android.dp.book.chapter02.refactor.cache;
+
+import com.android.dp.book.chapter02.refactor.ImageLoader;
 
 import android.graphics.Bitmap;
 import android.test.AndroidTestCase;

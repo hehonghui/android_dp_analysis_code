@@ -22,24 +22,24 @@
  * THE SOFTWARE.
  */
 
-package com.android.dp.book.chapter03.refactor;
+package com.android.dp.book.chapter03.refactor.policy;
 
 import java.util.List;
 
 /**
- * 顺序加载,先请求的就会先被加载
+ * 从队尾开始加载,即逆序加载
  */
-public class SerailLoadPolicy implements LoaderPolicy {
+public class ReverseLoadPolicy implements LoaderPolicy {
 
     List<String> mWattingList;
 
-    public SerailLoadPolicy(List<String> list) {
+    public ReverseLoadPolicy(List<String> list) {
         mWattingList = list;
     }
 
     public String getUrl() {
         int size = mWattingList.size();
-        return size > 0 ? mWattingList.get(0) : "";
+        return size > 0 ? mWattingList.get(size) : "";
     }
 
 }

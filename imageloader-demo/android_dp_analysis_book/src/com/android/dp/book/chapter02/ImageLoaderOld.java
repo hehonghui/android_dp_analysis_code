@@ -24,7 +24,12 @@
 
 package com.android.dp.book.chapter02;
 
+import com.android.dp.book.chapter02.cache.DiskCache;
+import com.android.dp.book.chapter02.cache.DoubleCache;
+import com.android.dp.book.chapter02.cache.MemoryCache;
+
 import android.graphics.Bitmap;
+import android.os.Handler;
 import android.widget.ImageView;
 
 public class ImageLoaderOld {
@@ -34,6 +39,7 @@ public class ImageLoaderOld {
     DoubleCache mDoubleCache = new DoubleCache();
     boolean isUseDiskCache = false;
     boolean isUseDoubleCache = false;
+    private Handler mUiHandler = new Handler() ;
 
     // 加载图片到ImageView中
     public void displayImage(String url, ImageView imageView) {

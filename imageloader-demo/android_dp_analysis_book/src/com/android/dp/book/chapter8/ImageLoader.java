@@ -28,7 +28,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
 
-import com.android.dp.book.chapter03.refactor.LoaderPolicy;
+import com.android.dp.book.chapter03.refactor.policy.LoaderPolicy;
+import com.android.dp.book.chapter8.cache.ImageCache;
+import com.android.dp.book.chapter8.cache.MemoryCache;
 
 import java.net.HttpURLConnection;
 import java.net.URL;

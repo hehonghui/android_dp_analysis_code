@@ -22,17 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.android.dp.book.chapter8;
+package com.android.dp.book.chapter02.cache;
 
 import android.graphics.Bitmap;
 
 /**
- * 图片缓存接口
- * 
- * @author mrsimple
+ * 双缓存。获取图片时先从内存缓存中获取，如果内存中没有缓存该图片再从sd卡中获取。 缓存图片也是也是在内存和sd卡中都缓存一份。
  */
-public interface ImageCache {
-    public Bitmap get(String url);
+public class DoubleCache {
+    MemoryCache mMemoryCache = new MemoryCache();
+    DiskCache mDiskCache = new DiskCache();
 
-    public void put(String url, Bitmap bmp);
+    // 先从内存缓存中获取图片，如果没有再从sd卡中获取
+    public Bitmap get(String url) {
+        Bitmap bitmap = mMemoryCache.get(url);
+        if (bitmap == null) {
+            bitmap = mDiskCache.get(url);
+        }
+        return bitmap;
+    }
+
+    // 将图片缓存到内存和sd卡中
+    public void put(String url, Bitmap bmp) {
+        mMemoryCache.put(url, bmp);
+        mDiskCache.put(url, bmp);
+    }
 }

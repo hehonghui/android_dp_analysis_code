@@ -26,6 +26,7 @@ package com.android.dp.book.chapter01.refactor;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Handler;
 import android.widget.ImageView;
 
 import java.net.HttpURLConnection;
@@ -42,6 +43,7 @@ public class ImageLoader {
     // 线程池,线程数量为CPU的数量
     ExecutorService mExecutorService = Executors.newFixedThreadPool(Runtime.getRuntime()
             .availableProcessors());
+    private Handler mUiHandler = new Handler() ;
 
     public void displayImage(final String url, final ImageView imageView) {
         Bitmap bitmap = mImageCache.get(url);
@@ -60,12 +62,22 @@ public class ImageLoader {
                     return;
                 }
                 if (imageView.getTag().equals(url)) {
-                    imageView.setImageBitmap(bitmap);
+                	updateImageView(imageView, bitmap) ;
                 }
                 mImageCache.put(url, bitmap);
             }
         });
     }
+    
+    private void updateImageView(final ImageView imageView, final Bitmap bitmap) {
+		mUiHandler.post(new Runnable() {
+			
+			@Override
+			public void run() {
+				 imageView.setImageBitmap(bitmap); ;				
+			}
+		});
+	}
 
     public Bitmap downloadImage(String imageUrl) {
         Bitmap bitmap = null;

@@ -27,8 +27,9 @@ package com.android.dp.book.chapter03.refactor;
 import android.graphics.Bitmap;
 import android.widget.ImageView;
 
-import com.android.dp.book.chapter02.refactor.ImageCache;
-import com.android.dp.book.chapter02.refactor.MemoryCache;
+import com.android.dp.book.chapter02.refactor.cache.ImageCache;
+import com.android.dp.book.chapter02.refactor.cache.MemoryCache;
+import com.android.dp.book.chapter03.refactor.policy.LoaderPolicy;
 
 import java.util.ArrayList;
 import java.util.List;

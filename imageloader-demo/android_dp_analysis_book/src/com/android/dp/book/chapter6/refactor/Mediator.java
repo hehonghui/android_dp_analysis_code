@@ -45,12 +45,11 @@ public class Mediator {
                 return room;
             }
         }
-
         return null;
     }
 
     private boolean isSuitable(float area, float price, Room room) {
-        return Math.abs(room.price - price) < Tenant.diffPrice
-                && Math.abs(room.area - area) < Tenant.diffPrice;
+        return price <= room.price
+                &&  area >= room.area;
     }
 }
