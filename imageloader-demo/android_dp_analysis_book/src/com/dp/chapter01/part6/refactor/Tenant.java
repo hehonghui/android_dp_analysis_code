@@ -28,11 +28,7 @@ package com.dp.chapter01.part6.refactor;
  * 租户
  */
 public class Tenant {
-    public float roomArea;
-    public float roomPrice;
-
-    public void rentRoom(Mediator mediator) {
+    public void rentRoom(float roomArea, float roomPrice, Mediator mediator) {
         System.out.println("租到房啦   " + mediator.rentOut(roomArea, roomPrice));
     }
-
 }

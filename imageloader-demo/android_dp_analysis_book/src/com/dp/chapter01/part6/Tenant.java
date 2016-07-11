@@ -30,13 +30,10 @@ import java.util.List;
  * 租户
  */
 public class Tenant {
-    public float roomArea;
-    public float roomPrice;
-
-    public void rentRoom(Mediator mediator) {
+    public void rentRoom(float roomArea, float roomPrice,  Mediator mediator) {
         List<Room> rooms = mediator.getAllRooms();
         for (Room room : rooms) {
-            if (isSuitable(room)) {
+            if (isSuitable(roomArea, roomPrice, room)) {
                 System.out.println("租到房间啦! " + room);
                 break;
             }
@@ -44,8 +41,8 @@ public class Tenant {
     }
 
     // 租金要小于等于指定的值,面积要大于等于指定的值
-    private boolean isSuitable(Room room) {
+    private boolean isSuitable(float roomArea, float roomPrice, Room room) {
         return room.price <= roomPrice
-                && room.area <= roomArea;
+                && room.area >= roomArea;
     }
 }

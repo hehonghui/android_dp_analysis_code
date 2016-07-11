@@ -27,6 +27,8 @@ package com.dp.chapter01.part6.refactor;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dp.chapter01.part6.Room;
+
 /**
  * 中介
  */
@@ -48,8 +50,8 @@ public class Mediator {
         return null;
     }
 
-    private boolean isSuitable(float area, float price, Room room) {
-        return price <= room.price
-                &&  area >= room.area;
+    private boolean isSuitable(float roomArea, float roomPrice, Room room) {
+        return room.price <= roomPrice
+                && room.area >= roomArea;
     }
 }

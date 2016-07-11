@@ -29,10 +29,8 @@ public class RentTestCase {
 
     public static void main(String[] args) {
         Tenant tenant = new Tenant();
-        tenant.roomArea = 16;
-        tenant.roomPrice = 2500;
-
-        tenant.rentRoom(new Mediator());
+        // 16平米以上价格在2500一下的房子
+        tenant.rentRoom(16, 2500, new Mediator());
     }
 
 }
