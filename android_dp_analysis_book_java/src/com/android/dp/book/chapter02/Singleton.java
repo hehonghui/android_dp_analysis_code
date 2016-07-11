@@ -22,21 +22,25 @@
  * THE SOFTWARE.
  */
 
-package com.android.dp.book.chapter13;
+package com.android.dp.book.chapter02;
 
-public class Client {
-    public static void main(String[] args) {
-        CallOfDuty game = new CallOfDuty();
-        game.play();
+import java.io.ObjectStreamException;
+import java.io.Serializable;
 
-        Caretaker caretaker = new Caretaker();
-        // 游戏存档
-        caretaker.archive(game.createMemoto());
-        // 退出游戏
-        game.quit();
+public class Singleton implements Serializable {
 
-        // 恢复游戏
-        CallOfDuty newGame = new CallOfDuty();
-        newGame.restore(caretaker.getMemoto());
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+    
+    static Singleton sInstance = new Singleton() ;
+    
+    private Singleton() {
     }
+
+    private Object readResolve() throws ObjectStreamException {
+        return sInstance;
+    }
+
 }

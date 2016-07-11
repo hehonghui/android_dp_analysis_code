@@ -24,19 +24,24 @@
 
 package com.android.dp.book.chapter13;
 
-public class Client {
-    public static void main(String[] args) {
-        CallOfDuty game = new CallOfDuty();
-        game.play();
+/**
+ * Caretaker,负责管理 Memoto
+ */
+public class Caretaker {
+    Memoto mMemoto;
 
-        Caretaker caretaker = new Caretaker();
-        // 游戏存档
-        caretaker.archive(game.createMemoto());
-        // 退出游戏
-        game.quit();
-
-        // 恢复游戏
-        CallOfDuty newGame = new CallOfDuty();
-        newGame.restore(caretaker.getMemoto());
+    /**
+     * 存档
+     */
+    public void archive(Memoto memoto) {
+        this.mMemoto = memoto;
     }
+
+    /**
+     * 获取存档
+     */
+    public Memoto getMemoto() {
+        return mMemoto;
+    }
+
 }

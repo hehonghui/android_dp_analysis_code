@@ -22,21 +22,28 @@
  * THE SOFTWARE.
  */
 
-package com.android.dp.book.chapter13;
+package com.android.dp.book.chapter07.refactor;
 
-public class Client {
-    public static void main(String[] args) {
-        CallOfDuty game = new CallOfDuty();
-        game.play();
+// 公交车价格计算策略
+public class BusStrategy implements CalculateStrategy {
 
-        Caretaker caretaker = new Caretaker();
-        // 游戏存档
-        caretaker.archive(game.createMemoto());
-        // 退出游戏
-        game.quit();
-
-        // 恢复游戏
-        CallOfDuty newGame = new CallOfDuty();
-        newGame.restore(caretaker.getMemoto());
+    /**
+     * 北京公交车,10里之内1块钱,超过十公里之后每加一块钱可以乘5公里
+     * 
+     * @param miles 公里
+     * @return
+     */
+    @Override
+    public int calculatePrice(int miles) {
+        // 超过10公里的总距离
+        int extraTotal = miles - 10;
+        // 超过的距离是5公里的倍数
+        int extraFactor = extraTotal / 5;
+        // 超过的距离对5公里的取余
+        int fraction = extraTotal % 5;
+        // 价格计算
+        int price = 1 + extraFactor * 1;
+        return fraction > 0 ? ++price : price;
     }
+
 }

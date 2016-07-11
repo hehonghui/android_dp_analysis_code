@@ -22,21 +22,31 @@
  * THE SOFTWARE.
  */
 
-package com.android.dp.book.chapter13;
+package com.android.dp.book.chapter07.refactor;
 
-public class Client {
-    public static void main(String[] args) {
-        CallOfDuty game = new CallOfDuty();
-        game.play();
+// 地铁价格计算策略
+public class SubwayStrategy implements CalculateStrategy {
 
-        Caretaker caretaker = new Caretaker();
-        // 游戏存档
-        caretaker.archive(game.createMemoto());
-        // 退出游戏
-        game.quit();
-
-        // 恢复游戏
-        CallOfDuty newGame = new CallOfDuty();
-        newGame.restore(caretaker.getMemoto());
+    /**
+     * 6公里(含)内3元；6-12公里(含)4元；12-22公里(含)5元；22-32公里(含)6元；
+     * 
+     * @param miles 公里
+     * @return
+     */
+    @Override
+    public int calculatePrice(int miles) {
+        if (miles <= 6) {
+            return 3;
+        } else if (miles > 6 && miles < 12) {
+            return 4;
+        } else if (miles > 12 && miles < 22) {
+            return 5;
+        }
+        else if (miles > 22 && miles < 32) {
+            return 6;
+        }
+        // 其他距离我们简化为7块
+        return 7;
     }
+
 }

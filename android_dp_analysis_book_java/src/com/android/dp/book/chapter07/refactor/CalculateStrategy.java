@@ -22,21 +22,17 @@
  * THE SOFTWARE.
  */
 
-package com.android.dp.book.chapter13;
+package com.android.dp.book.chapter07.refactor;
 
-public class Client {
-    public static void main(String[] args) {
-        CallOfDuty game = new CallOfDuty();
-        game.play();
-
-        Caretaker caretaker = new Caretaker();
-        // 游戏存档
-        caretaker.archive(game.createMemoto());
-        // 退出游戏
-        game.quit();
-
-        // 恢复游戏
-        CallOfDuty newGame = new CallOfDuty();
-        newGame.restore(caretaker.getMemoto());
-    }
+/**
+ * 计算接口
+ */
+public interface CalculateStrategy {
+    /**
+     * 按距离来计算价格
+     * 
+     * @param miles 公里
+     * @return 返回价格
+     */
+    int calculatePrice(int miles);
 }

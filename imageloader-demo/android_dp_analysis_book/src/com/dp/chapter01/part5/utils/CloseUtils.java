@@ -22,21 +22,27 @@
  * THE SOFTWARE.
  */
 
-package com.android.dp.book.chapter13;
+package com.dp.chapter01.part5.utils;
 
-public class Client {
-    public static void main(String[] args) {
-        CallOfDuty game = new CallOfDuty();
-        game.play();
+import java.io.Closeable;
+import java.io.IOException;
 
-        Caretaker caretaker = new Caretaker();
-        // 游戏存档
-        caretaker.archive(game.createMemoto());
-        // 退出游戏
-        game.quit();
-
-        // 恢复游戏
-        CallOfDuty newGame = new CallOfDuty();
-        newGame.restore(caretaker.getMemoto());
+/**
+ * 关闭工具类
+ */
+public abstract class CloseUtils {
+    /**
+     * 关闭Closeable对象
+     * 
+     * @param closeable
+     */
+    public static void closeQuietly(Closeable closeable) {
+        if (null != closeable) {
+            try {
+                closeable.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

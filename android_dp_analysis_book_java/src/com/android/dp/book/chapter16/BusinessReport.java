@@ -22,21 +22,35 @@
  * THE SOFTWARE.
  */
 
-package com.android.dp.book.chapter13;
+package com.android.dp.book.chapter16;
 
-public class Client {
-    public static void main(String[] args) {
-        CallOfDuty game = new CallOfDuty();
-        game.play();
+import java.util.LinkedList;
+import java.util.List;
 
-        Caretaker caretaker = new Caretaker();
-        // 游戏存档
-        caretaker.archive(game.createMemoto());
-        // 退出游戏
-        game.quit();
+/**
+ * 员工业务报表
+ * 
+ */
+public class BusinessReport {
+    List<Staff> mStaffs = new LinkedList<Staff>();
 
-        // 恢复游戏
-        CallOfDuty newGame = new CallOfDuty();
-        newGame.restore(caretaker.getMemoto());
+    public BusinessReport() {
+        mStaffs.add(new Manager("王经理"));
+        mStaffs.add(new Engineer("工程师-Shawn.Xiong"));
+        mStaffs.add(new Engineer("工程师-Kael"));
+        mStaffs.add(new Engineer("工程师-Chaossss"));
+        mStaffs.add(new Engineer("工程师-Tiiime"));
+    }
+    
+
+    /**
+     * 为访问者展示报表
+     * 
+     * @param visitor
+     */
+    public void showReport(Visitor visitor) {
+        for (Staff staff : mStaffs) {
+            staff.accept(visitor);
+        }
     }
 }

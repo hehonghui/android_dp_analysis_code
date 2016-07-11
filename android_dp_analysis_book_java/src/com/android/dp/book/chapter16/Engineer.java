@@ -22,21 +22,29 @@
  * THE SOFTWARE.
  */
 
-package com.android.dp.book.chapter13;
+package com.android.dp.book.chapter16;
 
-public class Client {
-    public static void main(String[] args) {
-        CallOfDuty game = new CallOfDuty();
-        game.play();
+import java.util.Random;
 
-        Caretaker caretaker = new Caretaker();
-        // 游戏存档
-        caretaker.archive(game.createMemoto());
-        // 退出游戏
-        game.quit();
+/**
+ * 工程师
+ */
+public class Engineer extends Staff {
 
-        // 恢复游戏
-        CallOfDuty newGame = new CallOfDuty();
-        newGame.restore(caretaker.getMemoto());
+    public Engineer(String aName) {
+        super(aName) ;
+    }
+    
+    
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visit(this);
+    }
+
+    /**
+     * 工程师这一年写的代码行数量
+     */
+    public int getCodeLines() {
+        return new Random().nextInt(10 * 10000);
     }
 }

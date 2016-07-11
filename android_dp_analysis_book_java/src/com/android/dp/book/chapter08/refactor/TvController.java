@@ -22,21 +22,48 @@
  * THE SOFTWARE.
  */
 
-package com.android.dp.book.chapter13;
+package com.android.dp.book.chapter08.refactor;
 
-public class Client {
-    public static void main(String[] args) {
-        CallOfDuty game = new CallOfDuty();
-        game.play();
+/**
+ * 电视遥控器
+ */
+public class TvController implements TvState, PowerController {
+    TvState mTvState;
 
-        Caretaker caretaker = new Caretaker();
-        // 游戏存档
-        caretaker.archive(game.createMemoto());
-        // 退出游戏
-        game.quit();
-
-        // 恢复游戏
-        CallOfDuty newGame = new CallOfDuty();
-        newGame.restore(caretaker.getMemoto());
+    public void setTvState(TvState mTvState) {
+        this.mTvState = mTvState;
     }
+
+    @Override
+    public void nextChannel() {
+        mTvState.nextChannel();
+    }
+
+    @Override
+    public void prevChannel() {
+        mTvState.prevChannel();
+    }
+
+    @Override
+    public void turnUp() {
+        mTvState.turnUp();
+    }
+
+    @Override
+    public void turnDown() {
+        mTvState.turnDown();
+    }
+
+    @Override
+    public void powerOn() {
+        setTvState(new PowerOnState());
+        System.out.println("开机啦");
+    }
+
+    @Override
+    public void powerOff() {
+        setTvState(new PowerOffState());
+        System.out.println("关机啦");
+    }
+
 }

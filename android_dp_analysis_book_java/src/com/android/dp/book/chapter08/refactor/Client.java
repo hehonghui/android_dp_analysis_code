@@ -22,21 +22,20 @@
  * THE SOFTWARE.
  */
 
-package com.android.dp.book.chapter13;
+package com.android.dp.book.chapter08.refactor;
 
 public class Client {
     public static void main(String[] args) {
-        CallOfDuty game = new CallOfDuty();
-        game.play();
-
-        Caretaker caretaker = new Caretaker();
-        // 游戏存档
-        caretaker.archive(game.createMemoto());
-        // 退出游戏
-        game.quit();
-
-        // 恢复游戏
-        CallOfDuty newGame = new CallOfDuty();
-        newGame.restore(caretaker.getMemoto());
+        TvController tvController = new TvController();
+        // 设置开机状态
+        tvController.powerOn();
+        // 下一频道
+        tvController.nextChannel();
+        // 调高音量
+        tvController.turnUp();
+        // 设置关机状态
+        tvController.powerOff();
+        // 调高音量, 此时不会生效
+        tvController.turnUp();
     }
 }

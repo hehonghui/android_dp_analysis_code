@@ -22,21 +22,26 @@
  * THE SOFTWARE.
  */
 
-package com.android.dp.book.chapter13;
+package com.android.dp.book.chapter07.refactor;
 
-public class Client {
+// 公交出行价格计算器
+public class TranficCalculator {
+
     public static void main(String[] args) {
-        CallOfDuty game = new CallOfDuty();
-        game.play();
+        TranficCalculator calculator = new TranficCalculator();
+        calculator.setStrategy(new BusStrategy());
+        System.out.println("公交车乘16公里的价格 : " + calculator.calculatePrice(16));
+        calculator.setStrategy(new TaxiStrategy());
+        System.out.println("出租车乘16公里的价格 : " + calculator.calculatePrice(16));
+    }
 
-        Caretaker caretaker = new Caretaker();
-        // 游戏存档
-        caretaker.archive(game.createMemoto());
-        // 退出游戏
-        game.quit();
+    CalculateStrategy mStrategy;
 
-        // 恢复游戏
-        CallOfDuty newGame = new CallOfDuty();
-        newGame.restore(caretaker.getMemoto());
+    public void setStrategy(CalculateStrategy mStrategy) {
+        this.mStrategy = mStrategy;
+    }
+
+    public int calculatePrice(int km) {
+        return mStrategy.calculatePrice(km);
     }
 }

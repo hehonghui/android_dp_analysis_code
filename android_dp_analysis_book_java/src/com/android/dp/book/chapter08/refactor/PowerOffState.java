@@ -22,21 +22,33 @@
  * THE SOFTWARE.
  */
 
-package com.android.dp.book.chapter13;
+package com.android.dp.book.chapter08.refactor;
 
-public class Client {
-    public static void main(String[] args) {
-        CallOfDuty game = new CallOfDuty();
-        game.play();
+/**
+ * 关机状态
+ * 
+ * @author mrsimple
+ */
+public class PowerOffState implements TvState {
 
-        Caretaker caretaker = new Caretaker();
-        // 游戏存档
-        caretaker.archive(game.createMemoto());
-        // 退出游戏
-        game.quit();
+    @Override
+    public void nextChannel() {
 
-        // 恢复游戏
-        CallOfDuty newGame = new CallOfDuty();
-        newGame.restore(caretaker.getMemoto());
     }
+
+    @Override
+    public void prevChannel() {
+
+    }
+
+    @Override
+    public void turnUp() {
+
+    }
+
+    @Override
+    public void turnDown() {
+
+    }
+
 }

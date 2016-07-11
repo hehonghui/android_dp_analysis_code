@@ -22,21 +22,20 @@
  * THE SOFTWARE.
  */
 
-package com.android.dp.book.chapter13;
+package com.android.dp.book.chapter16;
 
-public class Client {
-    public static void main(String[] args) {
-        CallOfDuty game = new CallOfDuty();
-        game.play();
+/**
+ * CEO访问者,只关注业绩
+ */
+public class CEOVisitor implements Visitor {
+    @Override
+    public void visit(Engineer engineer) {
+        System.out.println("工程师 : " + engineer.name + ", KPI : " + engineer.kpi);
+    }
 
-        Caretaker caretaker = new Caretaker();
-        // 游戏存档
-        caretaker.archive(game.createMemoto());
-        // 退出游戏
-        game.quit();
-
-        // 恢复游戏
-        CallOfDuty newGame = new CallOfDuty();
-        newGame.restore(caretaker.getMemoto());
+    @Override
+    public void visit(Manager mgr) {
+        System.out.println("经理 : " + mgr.name + ", KPI : " + mgr.kpi + ", 新产品数量 : "
+                + mgr.getProducts());
     }
 }

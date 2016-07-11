@@ -24,19 +24,18 @@
 
 package com.android.dp.book.chapter13;
 
-public class Client {
-    public static void main(String[] args) {
-        CallOfDuty game = new CallOfDuty();
-        game.play();
+/**
+ * 备忘录类
+ */
+public class Memoto {
+    public int mCheckpoint;
+    public int mLifeValue;
+    public String mWeapon;
 
-        Caretaker caretaker = new Caretaker();
-        // 游戏存档
-        caretaker.archive(game.createMemoto());
-        // 退出游戏
-        game.quit();
-
-        // 恢复游戏
-        CallOfDuty newGame = new CallOfDuty();
-        newGame.restore(caretaker.getMemoto());
+    @Override
+    public String toString() {
+        return "Memoto [mCheckpoint=" + mCheckpoint + ", mLifeValue=" + mLifeValue + ", mWeapon="
+                + mWeapon + "]";
     }
+
 }
